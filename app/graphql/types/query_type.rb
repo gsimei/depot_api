@@ -10,8 +10,8 @@ module Types
       context.schema.object_from_id(id, context)
     end
 
-    field :nodes, [Types::NodeType, null: true], null: true, description: "Fetches a list of objects given a list of IDs." do
-      argument :ids, [ID], required: true, description: "IDs of the objects."
+    field :nodes, [ Types::NodeType, null: true ], null: true, description: "Fetches a list of objects given a list of IDs." do
+      argument :ids, [ ID ], required: true, description: "IDs of the objects."
     end
 
     def nodes(ids:)
@@ -26,6 +26,12 @@ module Types
       description: "An example field added by the generator"
     def test_field
       "Hello World!"
+    end
+
+    # Agrupamento de queries de produtos
+    field :product_queries, Types::ProductQueriesType, null: false, description: "Product related queries"
+    def product_queries
+      Object.new
     end
   end
 end
