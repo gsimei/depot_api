@@ -1,6 +1,6 @@
 module Types
   class ProductQueriesType < Types::BaseObject
-    field :products, [Types::ProductType], null: false,
+    field :products, [ Types::ProductType ], null: false,
       description: "Get all products"
     def products
       Product.all
@@ -14,7 +14,7 @@ module Types
       Product.find_by(id: id)
     end
 
-    field :search_products, [Types::ProductType], null: false,
+    field :search_products, [ Types::ProductType ], null: false,
       description: "Search products by name or description" do
       argument :query, String, required: true
     end
@@ -22,7 +22,7 @@ module Types
       Product.where("name ILIKE ? OR description ILIKE ?", "%#{query}%", "%#{query}%")
     end
 
-    field :products_by_price_range, [Types::ProductType], null: false,
+    field :products_by_price_range, [ Types::ProductType ], null: false,
       description: "Get products within a price range" do
       argument :min_price, Float, required: false
       argument :max_price, Float, required: false
@@ -34,7 +34,7 @@ module Types
       scope
     end
 
-    field :products_in_stock, [Types::ProductType], null: false,
+    field :products_in_stock, [ Types::ProductType ], null: false,
       description: "Get products that are in stock"
     def products_in_stock
       Product.where("stock_quantity > 0")
