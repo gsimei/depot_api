@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+
+# Script para parar os servidores Rails
+if File.exist?(".rails_pids")
+  pids = File.read(".rails_pids").split("\n")
+  
+  pids.each do |pid|
+    begin
+      Process.kill("TERM", pid.to_i)
+      puts "🛑 Servidor parado (PID: #{pid})"
+    rescue Errno::ESRCH
+      puts "⚠️  Processo #{pid} já estava parado"
+    end
+  end
+  
+  File.delete(".rails_pids")
+  puts "✅ Todos os servidores foram parados"
+else
+  puts "❌ Nenhum servidor encontrado"
+end

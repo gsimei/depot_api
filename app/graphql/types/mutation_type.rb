@@ -3,8 +3,8 @@
 module Types
   class MutationType < Types::BaseObject
     # Product mutations
-    field :create_product, mutation: Mutations::CreateProduct
-    field :update_product, mutation: Mutations::UpdateProduct
-    field :delete_product, mutation: Mutations::DeleteProduct
+    field :create_product, mutation: Mutations::Product::CreateProduct
+    field :update_product, mutation: Mutations::Product::UpdateProduct
+    field :delete_product, mutation: Mutations::Product::DeleteProduct
   end
 end

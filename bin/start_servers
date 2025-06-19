@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+
+# Script para inicializar automaticamente os servidores Rails
+puts "🚀 Iniciando servidores Rails..."
+
+# Verifica se as gems estão instaladas
+system("bundle check") || system("bundle install")
+
+# Inicia o servidor principal em background
+rails_pid = spawn("bin/rails server -p 3000")
+puts "📊 Servidor Rails principal iniciado na porta 3000 (PID: #{rails_pid})"
+
+# Inicia o servidor MCP em background  
+mcp_pid = spawn("bin/rails server -p 6029")
+puts "🔌 Servidor MCP iniciado na porta 6029 (PID: #{mcp_pid})"
+
+# Salva os PIDs para poder parar depois
+File.write(".rails_pids", "#{rails_pid}\n#{mcp_pid}")
+
+puts "✅ Servidores iniciados! Para parar, execute: bin/stop_servers"
+
+# Mantém o script rodando
+Process.wait
